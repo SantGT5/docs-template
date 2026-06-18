@@ -1,0 +1,11 @@
+services:
+  doc:
+    container_name: doc
+    build:
+      context: ../
+      dockerfile: docker/stack/doc/Dockerfile.local
+    ports:
+      - 5173:5173
+    volumes:
+      - /app/node_modules
+      - ../doc:/app

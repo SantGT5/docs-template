@@ -7,9 +7,8 @@ import { defineConfig } from "vite"
 
 // https://vite.dev/config/
 export default defineConfig({
-  resolve: {
-    tsconfigPaths: true,
-  },
+  resolve: { tsconfigPaths: true },
+  server: { host: true },
   plugins: [
     // MDX must run before the React plugin so the generated JSX is compiled.
     {

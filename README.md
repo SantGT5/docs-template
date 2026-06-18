@@ -20,26 +20,29 @@ them.
 
 ## Getting started
 
+The project runs in Docker and is driven through `make` — no local Node or npm
+required, just Docker and Make.
+
 ```bash
-npm install
-npm run dev
+make install      # install dependencies
+make start/local  # build and start the local environment
 ```
 
-Then open the printed URL (usually `http://localhost:5173`).
+Then open the printed URL (`http://localhost:5173`).
 
-### Scripts
+### Commands
 
-| Script            | Description                        |
-| ----------------- | ---------------------------------- |
-| `npm run dev`     | Start the Vite dev server with HMR |
-| `npm run build`   | Type-check (`tsc`) and build       |
-| `npm run preview` | Preview the production build       |
-| `npm run lint`    | Run ESLint                         |
+| Command            | Description                            |
+| ------------------ | -------------------------------------- |
+| `make help`        | Show the command list (default target) |
+| `make install`     | Install dependencies                   |
+| `make start/local` | Start the local environment            |
+| `make urls`        | Show the URLs to the running apps      |
 
 ## Project structure
 
 ```
-src/
+doc/src/
 ├─ components/
 │  ├─ content/      # CodeBox, CommandBox, Callout, Steps, CopyButton
 │  ├─ layout/       # Header, Sidebar, TableOfContents, DocsLayout, RootLayout…
@@ -62,7 +65,7 @@ src/
 
 ## Adding a page
 
-1. Create an MDX file in `src/pages/docs/content/`, e.g. `guides.mdx`:
+1. Create an MDX file in `doc/src/pages/docs/content/`, e.g. `guides.mdx`:
 
    ```mdx
    # Guides
@@ -72,7 +75,7 @@ src/
    <Callout type="tip">Standard Markdown is styled automatically.</Callout>
    ```
 
-2. Register it in `src/config/navigation.ts`:
+2. Register it in `doc/src/config/navigation.ts`:
 
    ```ts
    {
@@ -100,9 +103,9 @@ See `/docs/components` in the running app for live examples.
 
 ## Customizing
 
-- **Branding & metadata** — edit `src/config/site.ts` (name, description, GitHub).
-- **Accent color** — change the `brand` ramp in `src/theme/index.ts`.
-- **Navigation** — edit `src/config/navigation.ts`.
+- **Branding & metadata** — edit `doc/src/config/site.ts` (name, description, GitHub).
+- **Accent color** — change the `brand` ramp in `doc/src/theme/index.ts`.
+- **Navigation** — edit `doc/src/config/navigation.ts`.
 
 ## Tech stack
 
