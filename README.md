@@ -1,5 +1,7 @@
 # Docs Template
 
+<img width="2139" height="1373" alt="Image" src="https://github.com/user-attachments/assets/e898a5f4-46c4-4bac-b6f3-d23754c1af8f" />
+
 A clean, component-driven documentation template built with **React 19**,
 **Vite**, **Chakra UI v3** and **MDX**. Clone it, change a few config values, and
 write your docs in Markdown — dropping in real React components wherever you need
