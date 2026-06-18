@@ -1,0 +1,52 @@
+# Installation
+
+Get the template running on your machine in a couple of minutes.
+
+## Prerequisites
+
+- **Node.js 18+** and a package manager (npm, pnpm or yarn).
+- Basic familiarity with React and Markdown.
+
+## Set up the project
+
+<Steps>
+
+<Step title="Get the code">
+
+Scaffold a fresh copy without the git history:
+
+<CommandBox>npx degit your-org/your-repo my-docs</CommandBox>
+
+</Step>
+
+<Step title="Install dependencies">
+
+<CommandBox>npm install</CommandBox>
+
+</Step>
+
+<Step title="Start the dev server">
+
+<CommandBox>npm run dev</CommandBox>
+
+Open the printed URL (usually `http://localhost:5173`) and you're ready to edit.
+
+</Step>
+
+</Steps>
+
+## Available scripts
+
+| Script            | What it does                          |
+| ----------------- | ------------------------------------- |
+| `npm run dev`     | Start the Vite dev server with HMR    |
+| `npm run build`   | Type-check and build for production   |
+| `npm run preview` | Preview the production build locally  |
+| `npm run lint`    | Run ESLint over the project           |
+
+<Callout type="warning" title="Node version">
+
+If `npm install` fails, double-check your Node version with `node -v`. This
+template targets Node 18 or newer.
+
+</Callout>

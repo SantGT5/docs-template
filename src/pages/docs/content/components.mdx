@@ -1,0 +1,109 @@
+# Components
+
+The template ships with a small set of content components. They're available in
+every MDX page automatically. Here's how each one looks and how to use it.
+
+## CodeBox
+
+Fenced code blocks render through `CodeBox`, with syntax highlighting (themed for
+light and dark mode) and a copy button.
+
+```tsx
+function greet(name: string) {
+  return `Hello, ${name}!`;
+}
+
+greet("world");
+```
+
+Inline code like `const x = 1` is styled too.
+
+## CommandBox
+
+`CommandBox` renders terminal commands with a `$` prompt and a copy button. The
+copied text never includes the prompt.
+
+<CommandBox>npm run build</CommandBox>
+
+For multiple commands, pass a template string:
+
+<CommandBox>{`git add .
+git commit -m "docs: update"
+git push`}</CommandBox>
+
+## Callout
+
+Use callouts to draw attention. Four types are available: `info`, `tip`,
+`warning` and `danger`.
+
+<Callout type="info">
+
+Use **info** for neutral notes and context.
+
+</Callout>
+
+<Callout type="tip" title="Pro tip">
+
+Use **tip** to share a helpful shortcut or best practice.
+
+</Callout>
+
+<Callout type="warning">
+
+Use **warning** when something needs care or has caveats.
+
+</Callout>
+
+<Callout type="danger" title="Destructive action">
+
+Use **danger** for irreversible or risky operations.
+
+</Callout>
+
+## Steps
+
+`Steps` lays out a numbered, ordered procedure. Each `Step` takes an optional
+`title`.
+
+<Steps>
+
+<Step title="First step">
+
+Describe the first thing the reader should do.
+
+</Step>
+
+<Step title="Second step">
+
+Steps can contain anything — including other components:
+
+<CommandBox>npm run dev</CommandBox>
+
+</Step>
+
+<Step title="Done">
+
+Wrap up and point to what comes next.
+
+</Step>
+
+</Steps>
+
+## Markdown elements
+
+Standard Markdown is fully supported and themed.
+
+> Blockquotes are styled with a colored accent border.
+
+- Bulleted lists
+- With multiple items
+  - And nested items
+
+1. Numbered lists
+2. Work as expected
+
+| Feature        | Supported |
+| -------------- | --------- |
+| Tables         | Yes       |
+| GFM            | Yes       |
+| Syntax themes  | Yes       |
