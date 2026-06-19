@@ -22,11 +22,10 @@ them.
 
 ## Getting started
 
-The project runs in Docker and is driven through `make` — no local Node or npm
-required, just Docker and Make.
+The project runs in Docker and is driven through `make`.
 
 ```bash
-make install      # install dependencies
+make install      # install pre-commit hooks + npm dependencies
 make start/local  # build and start the local environment
 ```
 
@@ -34,12 +33,34 @@ Then open the printed URL (`http://localhost:5173`).
 
 ### Commands
 
-| Command            | Description                            |
-| ------------------ | -------------------------------------- |
-| `make help`        | Show the command list (default target) |
-| `make install`     | Install dependencies                   |
-| `make start/local` | Start the local environment            |
-| `make urls`        | Show the URLs to the running apps      |
+| Command             | Description                                  |
+| ------------------- | -------------------------------------------- |
+| `make help`         | Show the command list (default target)       |
+| `make install`      | Install pre-commit & npm dependencies        |
+| `make install/ci`   | Install npm dependencies only (used by CI)   |
+| `make quality`      | Run the pre-commit tasks across all files    |
+| `make start/local`  | Start the local environment                  |
+| `make urls`         | Show the URLs to the running apps            |
+
+## Quality & pre-commit
+
+`make install` sets up [pre-commit](https://pre-commit.com/) hooks so checks run
+automatically on every commit:
+
+- **Conventional Commits** — commit messages are validated against the
+  Conventional Commits spec (`feat`, `fix`, `docs`, `chore`, …).
+- **File hygiene** — trailing whitespace, end-of-file, line endings, large
+  files, merge conflicts, private keys, and YAML/JSON/TOML validity.
+- **Code quality gate** — ESLint + TypeScript (`tsc`) over the `doc/` app.
+
+Run the full suite manually at any time with `make quality`.
+
+## Continuous integration
+
+A GitHub Actions workflow ([`.github/workflows/ci.yml`](.github/workflows/ci.yml))
+runs on every push and pull request to `main`. It installs dependencies
+(`make install/ci`), runs the pre-commit checks across all files, and builds the
+Docker image to ensure it stays buildable.
 
 ## Project structure
 
