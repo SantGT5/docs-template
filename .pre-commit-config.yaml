@@ -1,0 +1,61 @@
+# `pre-commit install` sets up both the pre-commit and commit-msg hooks.
+default_install_hook_types: [pre-commit, commit-msg]
+
+repos:
+  # Enforce Conventional Commits on the commit message.
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args:
+          [
+            --strict,
+            --verbose,
+            ci,
+            fix,
+            ref,
+            feat,
+            test,
+            docs,
+            perf,
+            debug,
+            chore,
+            build,
+            style,
+            revert,
+          ]
+
+  # Language-agnostic file hygiene.
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        files: \.(ts|tsx|js|jsx|mjs|cjs|css|mdx|md|html|yaml|yml|json|toml)$
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+      - id: check-yaml
+      - id: check-json
+        # tsconfig.*.json are JSONC (// and /* */ comments), which check-json rejects.
+        exclude: ^doc/tsconfig(\..+)?\.json$
+      - id: check-toml
+      - id: detect-private-key
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+
+  # Project quality gate: ESLint + TypeScript over the docs app (doc/).
+  # Uses the system node/npm (CI sets it up via actions/setup-node; locally it's
+  # the dev's own node) plus the deps installed by `make install`.
+  - repo: local
+    hooks:
+      - id: doc-quality
+        name: doc-quality (eslint + tsc)
+        entry: bash -c "cd doc && npm run quality"
+        language: system
+        require_serial: true
+        pass_filenames: false
+        files: ^doc/

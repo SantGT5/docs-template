@@ -28,6 +28,16 @@ urls: ## Show the urls to the running applications
 # General
 #----
 
-install: ## Install dependencies
+install: install/ci ## Install pre commit & npm dependencies
+	@echo "\nInstalling pre-commit"
+	@pipx install pre-commit
+
+	@echo "\nInstalling pre-commit hook"
+	@pre-commit install --hook-type pre-commit --hook-type commit-msg
+
+install/ci: ## Install dependencies
 	@echo "\nInstalling doc npm dependencies"
-	@cd doc && npm install
+	@cd doc && npm ci
+
+quality: ## Runs pre-commit tasks
+	@pre-commit run --all-files

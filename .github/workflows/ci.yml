@@ -1,0 +1,45 @@
+name: Docs Template - CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Least privilege: this workflow only reads the repo and runs checks.
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6.0.2
+
+      # Match the runtime pinned in docker/stack/doc/Dockerfile.local (node:25.6).
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "25"
+          cache: npm
+          cache-dependency-path: doc/package-lock.json
+
+      - name: Install dependencies
+        run: make install/ci
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: --all-files
+
+      - name: Build Doc image
+        uses: docker/build-push-action@v7.1.0
+        with:
+          context: .
+          no-cache: true
+          push: false
+          file: docker/stack/doc/Dockerfile.local
