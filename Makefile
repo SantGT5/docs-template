@@ -37,7 +37,7 @@ install: install/ci ## Install pre commit & npm dependencies
 
 install/ci: ## Install dependencies
 	@echo "\nInstalling doc npm dependencies"
-	@cd doc && npm ci
+	@cd doc && npm i
 
 quality: ## Runs pre-commit tasks
 	@pre-commit run --all-files
